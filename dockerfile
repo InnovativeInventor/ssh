@@ -2,11 +2,11 @@ FROM ubuntu:16.04
 
 MAINTAINER InnovativeInventor
 
-ARG PASSWORD rootpassword
+ARG PASS
 
 RUN apt-get update && apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
-RUN echo “root:$PASSWORD” | chpasswd
+RUN echo “root:$PASS” | chpasswd
 RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
 # SSH login fix. Otherwise user is kicked off after login

@@ -2,7 +2,7 @@ FROM ubuntu:16.04
 
 MAINTAINER InnovativeInventor
 
-ENV PASSWORD rootpassword
+ARG PASSWORD rootpassword
 
 RUN apt-get update && apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
@@ -17,4 +17,5 @@ RUN echo "export VISIBLE=now" >> /etc/profile
 
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]
+CMD echo “Please change your password for security purposes”
 CMD passwd

@@ -2,12 +2,8 @@ FROM ubuntu:16.04
 
 MAINTAINER InnovativeInventor
 
-
-ENV pass sshdocker
-
 RUN apt-get update && apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
-RUN echo root:$pass | chpasswd
 RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
 # SSH login fix. Otherwise user is kicked off after login
@@ -18,5 +14,3 @@ RUN echo "export VISIBLE=now" >> /etc/profile
 
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]
-CMD echo “Please change your password for security purposes”
-CMD passwd

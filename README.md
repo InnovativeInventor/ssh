@@ -5,7 +5,7 @@ A simple ssh container for docker
 Type in:
  `docker pull innovativeinventor/ssh`
 
-`docker run --name=ssh -d -p 524:22 innovativeinventor/ssh`
+`docker run --name=ssh -d -p 522:22 innovativeinventor/ssh`
 
 To set up a password, type
 

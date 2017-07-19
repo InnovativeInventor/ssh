@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "Making sudo, please ensure that you have verified this script's checksum"
+echo "Making sudo, please ensure that you have verified this script's checksum. Please type in a sudoer's password"
 sudo -v
 SIZE=$((100))
 while getopts d:s:a option
@@ -12,7 +12,7 @@ do
 	esac
 done
 
-echo "Running random.sh, with options -d $DOCKER -s $SIZE -a $APP at date +"%c"" >> /etc/rnd/random.log
+echo "Running random.sh, with options -d $DOCKER -s $SIZE -a $APP at date +%c" >> /etc/rnd/random.log
 
 # OS-detection
 if [[ "$OSTYPE" == "linux-gnu" ]]; then

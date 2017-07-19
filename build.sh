@@ -43,15 +43,16 @@ if [[ -n "$dockerisfree" ]]; then
 		then
 
 			# Creating everything, then exiting to prevent errors
-    		docker rm ssh
-    		docker run --name=ssh -d -p $port:22 innovativeinventor/ssh
+            docker rm ssh
+    	    docker run --name=ssh -d -p $port:22 innovativeinventor/ssh
 			sudo assets/random.sh -d ssh -a ssh
-			printf "$password\n$password\n"  | docker exec -i ssh$num passwd root
+			printf "$password\n$password\n"  | docker exec -i ssh passwd root
 			echo "Done! A container with the name ssh and the ssh port $port has been created for you. Entropy has been added to the system from this server, and the ssh keys have been regenerated."
 			exit 10
 
     	elif [[ "$response" =~ ^([nN][oO]|[nN])+$ ]]
     	then
+
     		# Allowing to proceed
     		echo "Okay, creating a new container with different name"
 
@@ -63,7 +64,6 @@ if [[ -n "$dockerisfree" ]]; then
     # Figuring out what number suffix to attach to the end
 	DOCKERBASE=1
 	DOCKERINCREMENT=1
-
 	num=$DOCKERBASE
 
 	while [[ -n "$dockerisfree" ]];do
@@ -76,13 +76,12 @@ if [[ -n "$dockerisfree" ]]; then
     docker run --name=ssh$num -d -p $port:22 innovativeinventor/ssh
 	sudo assets/random.sh -d ssh$num -a ssh
 	printf "$password\n$password\n"  | docker exec -i ssh$num passwd root
+    echo "Done! A container with the name ssh and the ssh$num port $port has been created for you. Entropy has been added to the system from this server, and the ssh keys have been regenerated."
 	exit 10
 fi
-
-# Mainly for debugging purposes
-echo "Setting up new version using name of $ssh$num"
 
 # Installing
 docker run --name=ssh -d -p $port:22 innovativeinventor/ssh
 sudo assets/random.sh -d ssh -a ssh
-printf "$password\n$password\n"  | docker exec -i ssh$num passwd root
+printf "$password\n$password\n"  | docker exec -i ssh passwd root
+echo "Done! A container with the name ssh and the ssh port $port has been created for you. Entropy has been added to the system from this server, and the ssh keys have been regenerated."

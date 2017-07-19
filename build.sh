@@ -45,7 +45,7 @@ if [[ -n "$dockerisfree" ]]; then
 			# Creating everything, then exiting to prevent errors
             docker rm ssh
     	    docker run --name=ssh -d -p $port:22 innovativeinventor/ssh
-			sudo assets/random.sh -d ssh -a ssh
+			sudo sh assets/random.sh -d ssh -a ssh
 			printf "$password\n$password\n"  | docker exec -i ssh passwd root
 			echo "Done! A container with the name ssh and the ssh port $port has been created for you. Entropy has been added to the system from this server, and the ssh keys have been regenerated."
 			exit 10
@@ -74,7 +74,7 @@ if [[ -n "$dockerisfree" ]]; then
 
 	# Creating everything, then exiting to prevent errors
     docker run --name=ssh$num -d -p $port:22 innovativeinventor/ssh
-	sudo assets/random.sh -d ssh$num -a ssh
+	sudo sh assets/random.sh -d ssh$num -a ssh
 	printf "$password\n$password\n"  | docker exec -i ssh$num passwd root
     echo "Done! A container with the name ssh and the ssh$num port $port has been created for you. Entropy has been added to the system from this server, and the ssh keys have been regenerated."
 	exit 10
@@ -82,6 +82,6 @@ fi
 
 # Installing
 docker run --name=ssh -d -p $port:22 innovativeinventor/ssh
-sudo assets/random.sh -d ssh -a ssh
+sudo sh assets/random.sh -d ssh -a ssh
 printf "$password\n$password\n"  | docker exec -i ssh passwd root
 echo "Done! A container with the name ssh and the ssh port $port has been created for you. Entropy has been added to the system from this server, and the ssh keys have been regenerated."

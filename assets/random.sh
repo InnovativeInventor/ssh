@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "Making sudo, please ensure that you have verified this script's checksum. Please type in a sudoer's password"
+echo "Making sudo, please ensure that you have verified this script's checksum"
 sudo -v
 SIZE=$((100))
 while getopts d:s:a option
@@ -11,8 +11,6 @@ do
 	a) APP=${OPTARG};;
 	esac
 done
-
-echo "Running random.sh, with options -d $DOCKER -s $SIZE -a $APP at date +%c" >> /etc/rnd/random.log
 
 # OS-detection
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
@@ -27,6 +25,10 @@ touch /etc/rnd/random_openssl
 chmod -R 775 /etc/rnd
 chmod 775 /etc/rnd/random
 chmod 775 /etc/rnd/random_openssl
+
+# Creating error log
+echo '' >> /etc/rnd/random.log
+echo "Running random.sh, with options -d $DOCKER -s $SIZE -a $APP at date +%c" >> /etc/rnd/random.log
 
 # Generating random numbers a few times
 cat /dev/random | head -c 512 >> /etc/rnd/random
@@ -53,4 +55,3 @@ if [[ "$APP" = "ssh" || "$APP" = "SSH" ]]; then
 fi
 
 rm -r /etc/rnd
-echo "" >> /etc/rnd/random.log

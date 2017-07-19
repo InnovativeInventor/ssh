@@ -8,7 +8,7 @@ Most docker ssh containers are insecure. They are started with almost no user in
 # Install
 Type in:
 
-`curl -L https://bit.ly/2tEzVta | bash`
+`bash <(wget -qO- https://bit.ly/2tEzVta)`
 
 You will be able to ssh into your container on port 522 using the password you just set up.
 

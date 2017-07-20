@@ -21,7 +21,7 @@ while [[ -n "$isfree" ]]; do
 done
 
 # Getting password for container
-echo Password:
+echo SSH password:
 read -s password
 
 # Checking if name exists
